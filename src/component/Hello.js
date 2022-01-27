@@ -11,6 +11,7 @@ import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import Stack from '@mui/material/Stack';
 import styles from '../css/Hello.module.css';
 
+
 export default function Hello() {
     const [teacher, setTeacher] = useState('');
     const [student, setStudent] = useState('');
@@ -22,6 +23,8 @@ export default function Hello() {
 
     const [stdList, setStdList] = useState([{}]);
 
+    const selClass = {width: '100%', margin: "5px 0px 15px 0px"};
+
     // 데이터 가져오기
     let db = {
         "권방울" : [
@@ -31,21 +34,44 @@ export default function Hello() {
             },
             {
                 "id" : "02", 
+                "name" : "조민지"
+            }
+        ],
+        "최수연" : [
+            {
+                "id" : "01", 
+                "name" : "류아연"
+            },
+            {
+                "id" : "02", 
                 "name" : "천준서"
+            }
+        ],
+        "김하영" : [
+            {
+                "id" : "01", 
+                "name" : "최주희"
+            },
+            {
+                "id" : "02", 
+                "name" : "최현호"
+            },
+            {
+                "id" : "03", 
+                "name" : "최현준"
+            },
+            {
+                "id" : "04", 
+                "name" : "홍그림"
+            },
+            {
+                "id" : "05", 
+                "name" : "홍루아"
             }
         ]
     }
 
     let data = db["권방울"];
-
-    useEffect(() => {
-
-
-    },[])
-
-
-    
-    
 
     let teacherOnChange = function (e, p) {
         const tchVal = e.target.value;
@@ -68,7 +94,7 @@ export default function Hello() {
     
     return (
         <div className={styles.box}>
-            <FormControl sx={{ m: 1, width: '100%' }}>
+            <FormControl sx={selClass}>
                 <InputLabel>교사</InputLabel>
                 <Select
                 id="iptTeacher"
@@ -87,7 +113,7 @@ export default function Hello() {
 
             <br/>
 
-            <FormControl sx={{ m: 1, width: '100%' }}>
+            <FormControl sx={selClass}>
                 <InputLabel>이름</InputLabel>
                 <Select
                 id="iptStudent"
@@ -106,9 +132,8 @@ export default function Hello() {
             <br/>
 
             <LocalizationProvider dateAdapter={AdapterDateFns} locale={koLocale}>
-                <Stack width="100%">
+                <Stack width="100%" className={styles.ipt}>
                     <MobileDatePicker
-                    mask={'__$__$____'}
                     label="심방 날짜"
                     value={value}
                     onChange={(newValue) => {
@@ -121,24 +146,27 @@ export default function Hello() {
 
             <br/>
 
-            <TextField
-            id="iptSimbang"
-            label="심방 내용"
-            multiline
-            rows={4}
-            defaultValue=""
-            fullWidth 
-            />
+            <div className={styles.ipt}>
+                <TextField
+                id="iptSimbang"
+                label="심방 내용"
+                multiline
+                rows={4}
+                defaultValue=""
+                fullWidth 
+                />
+            </div>
 
             <br/>
 
-            <FormControl sx={{ m: 1, width: '100%' }}>
+            <FormControl sx={selClass}>
                 <InputLabel>기도</InputLabel>
                 <Select
                 id="iptPray"
                 value={pray}
                 label="기도"
                 onChange={e => setPray(e.target.value)}
+                className={styles.ipt}
                 >
                 <MenuItem value="">
                     <em>선택</em>
@@ -150,13 +178,14 @@ export default function Hello() {
 
             <br/>
 
-            <FormControl sx={{ m: 1, width: '100%' }}>
+            <FormControl sx={selClass}>
                 <InputLabel>예배 방식</InputLabel>
                 <Select
                 id="iptWorship"
                 value={worship}
                 label="예배 방식"
                 onChange={e => setWorship(e.target.value)}
+                className={styles.ipt}
                 >
                 <MenuItem value="">
                     <em>선택</em>
@@ -168,13 +197,14 @@ export default function Hello() {
 
             <br/>
 
-            <FormControl sx={{ m: 1, width: '100%' }}>
+            <FormControl sx={selClass}>
                 <InputLabel>출석</InputLabel>
                 <Select
                 id="iptAtnd"
                 value={atnd}
                 label="출석"
                 onChange={e => setAtnd(e.target.value)}
+                className={styles.ipt}
                 >
                 <MenuItem value="">
                     <em>선택</em>
@@ -187,14 +217,16 @@ export default function Hello() {
 
             <br/>
 
-            <TextField
-            id="iptRsn"
-            label="결석 사유"
-            multiline
-            rows={4}
-            defaultValue=""
-            fullWidth
-            />
+            <div className={styles.ipt}>
+                <TextField
+                id="iptRsn"
+                label="결석 사유"
+                multiline
+                rows={4}
+                defaultValue=""
+                fullWidth
+                />
+            </div>
 
 
         </div>
