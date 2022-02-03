@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -10,7 +11,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import Stack from '@mui/material/Stack';
 import styles from '../css/Hello.module.css';
-
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function Hello() {
     const [teacher, setTeacher] = useState('');
@@ -19,7 +21,7 @@ export default function Hello() {
     const [worship, setWorship] = useState('');
     const [atnd, setAtnd] = useState('');
     const [value, setValue] = useState(new Date());
-
+    const [loading, setLoading] = React.useState(false); // 버튼 로딩 상태
 
     const [stdList, setStdList] = useState([{}]);
 
@@ -91,6 +93,17 @@ export default function Hello() {
 
     }    
     
+    // 전송 버튼
+    
+    let navigate = useNavigate();
+    function HandleClick() {
+        setLoading(true);
+        setTimeout(() => {
+            navigate("/info");
+            
+        }, 800);
+ 
+    }
     
     return (
         <div className={styles.box}>
@@ -227,6 +240,20 @@ export default function Hello() {
                 fullWidth
                 />
             </div>
+
+            <br/>
+            <br/>
+
+            <LoadingButton
+                color="secondary"
+                onClick={HandleClick}
+                loading={loading}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+            >
+                저장
+            </LoadingButton>
 
 
         </div>
